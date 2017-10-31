@@ -73,6 +73,9 @@ body.landing {
 .links-container .navbar-link:hover {
   color: rgb(233, 50, 117);
 }
+.links-container .navbar-link:active {
+  background-color: #fff;
+}
 
 .hero-content {
   position: relative;
