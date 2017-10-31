@@ -103,14 +103,6 @@ body.landing {
   max-width: 64rem;
 }
 
-.clearfix::after {
-   content: ".";
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
-}
-
 /* Medium and small screens (640px) */
 
 @media (min-width: 640px) {
@@ -150,4 +142,12 @@ body.landing {
   html {
     font-size: 120%;
   }
+}
+
+.clearfix::after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }
