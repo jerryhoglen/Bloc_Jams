@@ -109,6 +109,7 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 var setCurrentAlbum = function(album) {
   // #1
 
+
   // #2
   albumTitle.firstChild.nodeValue = album.title;
   albumArtist.firstChild.nodeValue = album.artist;
@@ -160,13 +161,7 @@ window.onload = function() {
 var findParentByClassName = function(element, targetClass) {
   if (element) {
     var currentParent = element.parentElement;
-    while (currentParent.className != targetClass && currentParent.className !== null) {
-      if (currentParent === undefined) {
-        console.log("No parent found");
-        return currentParent;
-      } else if (currentParent.className != targetClass) {
-        console.log("No parent found with that class name");
-      }
+    while (currentParent.className !== targetClass && currentParent.className !== null) {
       currentParent = currentParent.parentElement;
     }
     return currentParent;
