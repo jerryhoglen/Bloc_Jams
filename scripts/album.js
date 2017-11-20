@@ -136,6 +136,7 @@ window.onload = function() {
   songListContainer.addEventListener('mouseover', function(event) {
     if (event.target.parentElement.className === 'album-view-song-item') {
       var songItem = getSongItem(event.target);
+
       if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
         songItem.innerHTML = playButtonTemplate;
       }
@@ -167,7 +168,7 @@ var findParentByClassName = function(element, targetClass) {
     return currentParent;
   }
 };
-//Added comment
+
 var getSongItem = function(element) {
   switch (element.className) {
     case 'album-song-button':
@@ -200,7 +201,6 @@ var clickHandler = function(targetElement) {
     songItem.innerHTML = pauseButtonTemplate;
     currentlyPlayingSong = songItem.getAttribute('data-song-number');
   }
-
 };
 
 var albums = [albumPicasso, albumMarconi, albumJerry];
