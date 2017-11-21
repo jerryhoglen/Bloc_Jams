@@ -160,55 +160,62 @@ window.onload = function() {
 }
 
 var findParentByClassName = function(element, targetClass) {
-  if (element) {
-    var currentParent = element.parentElement;
-    while (currentParent.className !== targetClass && currentParent.className !== null) {
-      currentParent = currentParent.parentElement;
-    }
-    return currentParent;
-  }
-};
+    if (element) {
+      var currentParent = element.parentElement;
+      if (currentParent !== element.parentElement) {
+          console.log('No parent found');
+        }
+        while (currentParent.className !== targetClass &&
+          currentParent.className !== null) {
+          currentParent = currentParent.parentElement;
+        }
+        return currentParent;
+      }
+      else {
+        console.log('No parent found with that class name');
+      }
+    };
 
-var getSongItem = function(element) {
-  switch (element.className) {
-    case 'album-song-button':
-    case 'ion-play':
-    case 'ion-pause':
-      return findParentByClassName(element, 'song-item-number');
-    case 'album-view-song-item':
-      return element.querySelector('.song-item-number');
-    case 'song-item-title':
-    case 'song-item-duration':
-      return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
-    case 'song-item-number':
-      return element;
-    default:
-      return;
-  }
-};
+    var getSongItem = function(element) {
+      switch (element.className) {
+        case 'album-song-button':
+        case 'ion-play':
+        case 'ion-pause':
+          return findParentByClassName(element, 'song-item-number');
+        case 'album-view-song-item':
+          return element.querySelector('.song-item-number');
+        case 'song-item-title':
+        case 'song-item-duration':
+          return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+        case 'song-item-number':
+          return element;
+        default:
+          return;
+      }
+    };
 
-var clickHandler = function(targetElement) {
-  var songItem = getSongItem(targetElement);
-  if (currentlyPlayingSong === null) {
-    songItem.innerHTML = pauseButtonTemplate;
-    currentlyPlayingSong = songItem.getAttribute('data-song-number');
-  } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
-    songItem.innerHTML = playButtonTemplate;
-    currentlyPlayingSong = null;
-  } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
-    var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
-    currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
-    songItem.innerHTML = pauseButtonTemplate;
-    currentlyPlayingSong = songItem.getAttribute('data-song-number');
-  }
-};
+    var clickHandler = function(targetElement) {
+      var songItem = getSongItem(targetElement);
+      if (currentlyPlayingSong === null) {
+        songItem.innerHTML = pauseButtonTemplate;
+        currentlyPlayingSong = songItem.getAttribute('data-song-number');
+      } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
+        songItem.innerHTML = playButtonTemplate;
+        currentlyPlayingSong = null;
+      } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
+        var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+        currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
+        songItem.innerHTML = pauseButtonTemplate;
+        currentlyPlayingSong = songItem.getAttribute('data-song-number');
+      }
+    };
 
-var albums = [albumPicasso, albumMarconi, albumJerry];
-var index = 1;
-albumImage.addEventListener("click", function(event) {
-  setCurrentAlbum(albums[index]);
-  index++;
-  if (index == albums.length) {
-    index = 0;
-  }
-});
+    var albums = [albumPicasso, albumMarconi, albumJerry];
+    var index = 1;
+    albumImage.addEventListener("click", function(event) {
+      setCurrentAlbum(albums[index]);
+      index++;
+      if (index == albums.length) {
+        index = 0;
+      }
+    });
